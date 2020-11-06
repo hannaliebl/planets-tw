@@ -1,5 +1,5 @@
-import "./App.css";
 import { useState, useEffect } from "react";
+import TableRow from "./components/TableRow";
 import getAllPlanets from "./api/planets";
 
 function App() {
@@ -11,7 +11,6 @@ function App() {
     const fetchResults = async () => {
       try {
         const result = await getAllPlanets();
-        console.log(result);
         setPlanets(result);
       } catch (error) {
         setDisplayError(true);
@@ -20,37 +19,34 @@ function App() {
     };
     fetchResults();
   }, []);
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          {loading && <h1>Loading!</h1>}
-          {!loading && (
-            <table>
-              <thead>
-                <tr></tr>
-              </thead>
-              <tbody>
-                {planets.map((planet) => {
-                  return (
-                    <tr key={planet.name}>
-                      <td>{planet.name}</td>
-                      <td>{planet.climate}</td>
-                      <td>{planet.residents.length}</td>
-                      <td>{planet.terrain}</td>
-                      <td>{planet.population}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          )}
 
-          {!loading && displayError && (
-            <h1>Sorry, there was an error fetching planets</h1>
-          )}
-        </p>
-      </header>
+  return (
+    <div className="container">
+      {loading && <h1 className="text-center">Loading...</h1>}
+      {!loading && (
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Climate</th>
+              <th>Residents</th>
+              <th>Terrain</th>
+              <th>Population</th>
+              <th>Surface Area Covered by Water</th>
+            </tr>
+          </thead>
+          <tbody>
+            {planets.map((planet) => {
+              return <TableRow planet={planet} key={planet.name} />;
+            })}
+          </tbody>
+        </table>
+      )}
+      {!loading && displayError && (
+        <h1 className="text-center">
+          Sorry, there was an error fetching planet data, please try again.
+        </h1>
+      )}
     </div>
   );
 }
