@@ -3,11 +3,11 @@ const PLANETS_API_URL = "https://swapi.dev/api/planets/";
 // TOOD: Pagination? For now, get all results as it is only 60
 async function getAllPlanets() {
   let planets = [];
-  let results = await (await fetch(PLANETS_API_URL)).json();
-  planets = planets.concat(results.results);
-  while (results.next) {
-    results = await (await fetch(results.next)).json();
-    planets = planets.concat(results.results);
+  let response = await (await fetch(PLANETS_API_URL)).json();
+  planets = planets.concat(response.results);
+  while (response.next) {
+    response = await (await fetch(response.next)).json();
+    planets = planets.concat(response.results);
   }
   return planets.sort((a, b) => {
     if (a.name < b.name) {

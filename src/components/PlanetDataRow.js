@@ -1,8 +1,7 @@
-import { calculateWaterArea } from "../util/surfaceArea.js";
-import { convertUnknowns } from "../util/handleUnknown.js";
-import { convertDigitsToCol } from "../util/formatDigits.js";
+import { calculateWaterArea } from "../util/surfaceArea";
+import { convertUnknowns, groupDigitsByThree } from "../util/stringHelpers";
 
-function TableRow({ planet }) {
+export default function PlanetDataRow({ planet }) {
   return (
     <tr>
       <td>
@@ -13,10 +12,8 @@ function TableRow({ planet }) {
       <td>{convertUnknowns(planet.climate)}</td>
       <td>{planet.residents.length}</td>
       <td>{convertUnknowns(planet.terrain)}</td>
-      <td>{convertUnknowns(convertDigitsToCol(planet.population))}</td>
+      <td>{groupDigitsByThree(convertUnknowns(planet.population))}</td>
       <td>{calculateWaterArea(planet.diameter, planet.surface_water)}</td>
     </tr>
   );
 }
-
-export default TableRow;

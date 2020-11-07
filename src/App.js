@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import TableRow from "./components/TableRow";
+import PlanetDataRow from "./components/PlanetDataRow";
 import getAllPlanets from "./api/planets";
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="container">
       {loading && <h1 className="text-center">Loading...</h1>}
-      {!loading && (
+      {!loading && !displayError && (
         <table>
           <thead>
             <tr>
@@ -36,9 +36,9 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {planets.map((planet) => {
-              return <TableRow planet={planet} key={planet.name} />;
-            })}
+            {planets.map((planet) => (
+              <PlanetDataRow planet={planet} key={planet.name} />
+            ))}
           </tbody>
         </table>
       )}

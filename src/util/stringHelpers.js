@@ -1,19 +1,21 @@
-export function convertDigitsToCol(number) {
-  if (number.toString().length <= 3 || number === "unknown") {
+export function convertUnknowns(input) {
+  return input === "unknown" ? "?" : input;
+}
+
+export function groupDigitsByThree(number) {
+  if (number.toString().length <= 3) {
     return number;
   } else {
     const digitsArr = number.toString().split("");
-    const digitsWithSpaces = [];
-    digitsArr.forEach((_, i) => {
+    return digitsArr.map((digit, i) => {
       const remainingDigitsDivisibleByThree =
         (digitsArr.length - (i + 1)) % 3 === 0;
       const isNotLastDigit = i + 1 !== digitsArr.length;
       if (remainingDigitsDivisibleByThree && isNotLastDigit) {
-        digitsWithSpaces.push(digitsArr[i], " ");
+        return `${digit} `;
       } else {
-        digitsWithSpaces.push(digitsArr[i]);
+        return digit;
       }
     });
-    return digitsWithSpaces.join("");
   }
 }
