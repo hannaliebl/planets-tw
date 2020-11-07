@@ -5,8 +5,13 @@ async function getAllPlanets() {
   let planets = [];
   let response = await (await fetch(PLANETS_API_URL)).json();
   planets = planets.concat(response.results);
+  let page = 1;
   while (response.next) {
-    response = await (await fetch(response.next)).json();
+    // Rather than using response.next directly, add page manually to base URL
+    // as Safari CORS doesn't like http to https redirect
+    page++;
+    const newUrl = `${PLANETS_API_URL}?page=${page}`;
+    response = await (await fetch(newUrl)).json();
     planets = planets.concat(response.results);
   }
   return planets.sort((a, b) => {
