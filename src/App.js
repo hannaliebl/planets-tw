@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import PlanetDataRow from "./components/PlanetDataRow";
-import getAllPlanets from "./api/planets";
+import getPlanets from "./api/planets";
 
 function App() {
   const [planets, setPlanets] = useState([]);
@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const result = await getAllPlanets();
+        const result = await getPlanets();
         setPlanets(result);
       } catch (error) {
         setDisplayError(true);
