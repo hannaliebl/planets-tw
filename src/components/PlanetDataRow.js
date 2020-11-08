@@ -1,4 +1,4 @@
-import { calculateWaterArea } from "../util/surfaceArea";
+import calculateWaterArea from "../util/calculateWaterArea";
 import { convertUnknowns, groupDigitsByThree } from "../util/stringHelpers";
 
 export default function PlanetDataRow({ planet }) {

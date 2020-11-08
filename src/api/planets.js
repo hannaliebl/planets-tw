@@ -1,6 +1,6 @@
 const PLANETS_API_URL = "https://swapi.dev/api/planets/";
 
-// TOOD: Pagination? For now, get all results as it is only 60
+// TOOD: Pagination? For now, get all results as there are only 60
 async function getAllPlanets() {
   let planets = [];
   let response = await (await fetch(PLANETS_API_URL)).json();

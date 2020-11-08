@@ -2,7 +2,7 @@ import { groupDigitsByThree } from "./stringHelpers";
 
 const PI_APPROX = 3.14159265359;
 
-export function calculateWaterArea(diameter, surfaceWater) {
+export default function calculateWaterArea(diameter, surfaceWater) {
   if (isNaN(parseInt(diameter)) || isNaN(parseInt(surfaceWater))) {
     return "?";
   } else {
